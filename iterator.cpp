@@ -6,13 +6,3 @@
  */
 
 #include "iterator.h"
-
-iterator::iterator() {
-	// TODO Auto-generated constructor stub
-
-}
-
-iterator::~iterator() {
-	// TODO Auto-generated destructor stub
-}
-

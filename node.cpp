@@ -6,13 +6,3 @@
  */
 
 #include "node.h"
-
-node::node() {
-	// TODO Auto-generated constructor stub
-
-}
-
-node::~node() {
-	// TODO Auto-generated destructor stub
-}
-
