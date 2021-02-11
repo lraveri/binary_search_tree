@@ -13,7 +13,6 @@
 #include <vector>
 #include <utility>
 #include <iterator>
-#include <iomanip>      // sgamo->avoid
 
 #include "Node.h"
 #include "iterator.h"
