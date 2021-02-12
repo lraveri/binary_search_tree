@@ -1,28 +1,41 @@
-PROJECT_ROOT = $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+EXE = exe.x
+CXX = c++
+CXXFLAGS = -I include -g -std=c++11 -Wall -Wextra -lncurses
+SRC= main.cpp src/bst.cpp src/iterator.cpp src/node.cpp
+OBJ=$(SRC:.cpp=.o)
+INC = include/bst.h  include/node.h  include/iterator.h 
 
-OBJS = binary_search_tree.o
+# eliminate default suffixes
+.SUFFIXES:
+SUFFIXES =
 
-ifeq ($(BUILD_MODE),debug)
-	CFLAGS += -g
-else ifeq ($(BUILD_MODE),run)
-	CFLAGS += -O2
-else ifeq ($(BUILD_MODE),linuxtools)
-	CFLAGS += -g -pg -fprofile-arcs -ftest-coverage
-	LDFLAGS += -pg -fprofile-arcs -ftest-coverage
-else
-    $(error Build mode $(BUILD_MODE) not supported by this Makefile)
-endif
+# just consider our own suffixes
+.SUFFIXES: .cpp .o
 
-all:	binary_search_tree
+all: $(EXE)
 
-binary_search_tree:	$(OBJS)
-	$(CXX) $(LDFLAGS) -o $@ $^
-
-%.o:	$(PROJECT_ROOT)%.cpp
-	$(CXX) -c $(CFLAGS) $(CXXFLAGS) $(CPPFLAGS) -o $@ $<
-
-%.o:	$(PROJECT_ROOT)%.c
-	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
+.PHONY: all
 
 clean:
-	rm -fr binary_search_tree $(OBJS)
+	rm -rf $(OBJ) $(EXE) src/*~ include/*~ *~ html latex
+
+.PHONY: clean
+
+$(EXE): $(OBJ)
+	$(CXX) $^ -o $(EXE)
+
+documentation: Doxygen/doxy.in
+	doxygen $^
+
+.PHONY: documentation
+
+main.o: include/bst.h include/iterator.h include/node.h 
+
+src/bst.o: include/bst.h src/bst.cpp
+src/iterator.o: include/iterator.h 
+src/node.o: include/node.h
+
+format: $(SRC) $(INC)
+	@clang-format -i $^ -verbose || echo "Please install clang-format to run this commands"
+
+.PHONY: format

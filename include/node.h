@@ -13,7 +13,7 @@
 #include <utility>
 
 template <typename T>
-class node {
+struct node {
 
 	T elem;
 
@@ -23,8 +23,6 @@ class node {
 	std::unique_ptr<node> right;
 
 	node * parent;					// why raw pointer here?
-
-public:
 
 	node() = default;
 

@@ -14,7 +14,7 @@
 #include <utility>
 #include <iterator>
 
-#include "Node.h"
+#include "node.h"
 #include "iterator.h"
 
 template <class Tk,class Tv,class Tc = std::less<Tk>>
@@ -32,6 +32,13 @@ private:
 	std::unique_ptr<node_type> root;
 
 	Tc comp;
+
+	node_type* _begin() const noexcept;
+
+	template <typename T>
+	std::pair<Iterator,bool> _insert(T&& x);
+
+public:
 
 	bst() noexcept = default;
 	bst(std::pair<const Tk,Tv> element): root{new node_type{element}} {};
@@ -55,26 +62,26 @@ private:
 
 	Tv& operator[](Tk&& x);
 
-	// TODO: put to operator<< !
-
 	friend
-	std::ostream& operator<<(std::ostream& os, const bst& x);
+	std::ostream& operator<<(std::ostream& os, const bst& x) {
+		for (const auto& pair : x ) {
+			os << "["<<pair.first<<":"<<pair.second<<"] ";
+		}
+		os<<std::endl;
+		return os;
+	};
 
-	// TODO: iterator begin and end !
+	Iterator begin() noexcept;
 
-	Iterator begin();
+	Iterator end() { return Iterator{nullptr}; };
 
-	Iterator end();
+	Const_iterator begin() const noexcept;
 
-	// TODO: const iterator begin and end !
+	Const_iterator cbegin() const noexcept;
 
-	Const_iterator begin() const;
+	Const_iterator end()  const noexcept { return Const_iterator{nullptr}; };
 
-	Const_iterator cbegin() const;
-
-	Const_iterator end() const;
-
-	Const_iterator cend() const;
+	Const_iterator cend() const noexcept { return Const_iterator{nullptr}; };
 
 	// TODO: insert !
 

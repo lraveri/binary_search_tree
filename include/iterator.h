@@ -35,7 +35,30 @@ public:
 
 	reference operator*() const noexcept {return current->elem;};
 
-	// TODO: operator++
+	iterator& operator++() {
+		if (!current) {
+			return *this;
+		} else if(current->right) {
+			current = current->right.get();
+			while(current->left) {
+				current = current->left.get();
+			}
+		} else {
+			N * tmp{current->parent};
+			while(tmp && current == tmp->right.get()) {
+				current = tmp;
+				tmp = tmp->parent;
+			}
+			current = tmp;
+		}
+		return *this;
+	}
+
+	iterator operator++(int) {
+        	iterator it{*this};
+        	++(*this);
+        	return it;
+    }
 
 	bool operator==(const iterator& other) { return current == other.current; }
 
