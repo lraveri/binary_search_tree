@@ -2,6 +2,7 @@ CXX = g++
 CXXFLAGS = -Wall -Werror -Wextra -g -std=c++17 
 
 SRC = main.cpp
+
 EXE = $(SRC:.cpp=.x)
 
 all: $(EXE)
@@ -9,14 +10,14 @@ all: $(EXE)
 .PHONY: all
 
 %.x: %.cpp 
-  $(CXX) $< -o $@ $(CXXFLAGS)
+	$(CXX) $< -o $@ $(CXXFLAGS)
 
 format: $(SRC)
-  @clang-format -i $^ -verbose || echo "Please install clang-format to run this command"
+	@clang-format -i $^ -verbose || echo "Please install clang-format to run this command"
 
 .PHONY: format
 
 clean:
-  rm -f $(EXE) *~
+	rm -f $(EXE) *~
 
 .PHONY: clean
