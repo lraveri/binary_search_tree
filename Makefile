@@ -1,41 +1,22 @@
-EXE = exe.x
-CXX = c++
-CXXFLAGS = -I include -g -std=c++11 -Wall -Wextra -lncurses
-SRC= main.cpp src/bst.cpp src/iterator.cpp src/node.cpp
-OBJ=$(SRC:.cpp=.o)
-INC = include/bst.h  include/node.h  include/iterator.h 
+CXX = g++
+CXXFLAGS = -Wall -Werror -Wextra -g -std=c++17 
 
-# eliminate default suffixes
-.SUFFIXES:
-SUFFIXES =
-
-# just consider our own suffixes
-.SUFFIXES: .cpp .o
+SRC = main.cpp
+EXE = $(SRC:.cpp=.x)
 
 all: $(EXE)
 
 .PHONY: all
 
-clean:
-	rm -rf $(OBJ) $(EXE) src/*~ include/*~ *~ html latex
+%.x: %.cpp 
+  $(CXX) $< -o $@ $(CXXFLAGS)
 
-.PHONY: clean
-
-$(EXE): $(OBJ)
-	$(CXX) $^ -o $(EXE)
-
-documentation: Doxygen/doxy.in
-	doxygen $^
-
-.PHONY: documentation
-
-main.o: include/bst.h include/iterator.h include/node.h 
-
-src/bst.o: include/bst.h src/bst.cpp
-src/iterator.o: include/iterator.h 
-src/node.o: include/node.h
-
-format: $(SRC) $(INC)
-	@clang-format -i $^ -verbose || echo "Please install clang-format to run this commands"
+format: $(SRC)
+  @clang-format -i $^ -verbose || echo "Please install clang-format to run this command"
 
 .PHONY: format
+
+clean:
+  rm -f $(EXE) *~
+
+.PHONY: clean
