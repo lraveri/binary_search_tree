@@ -5,6 +5,8 @@ SRC = main.cpp
 
 EXE = $(SRC:.cpp=.x)
 
+IFLAGS = -I include
+
 all: $(EXE)
 
 .PHONY: all
