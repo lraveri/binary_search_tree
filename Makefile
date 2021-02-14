@@ -1,7 +1,7 @@
 CXX = c++
 CXXFLAGS = -Wall -Wextra -I include -g -std=c++11 
 
-SRC = main.cpp
+SRC = main.cpp src/bst.cpp src/node.cpp src/iterator.cpp
 
 EXE = $(SRC:.cpp=.x)
 
