@@ -5,7 +5,7 @@ SRC = main.cpp src/bst.cpp src/node.cpp src/iterator.cpp
 
 EXE = $(SRC:.cpp=.x)
 
-INC = include/bst.h  node/dog.h  include/iterator.h include/methods.h 
+INC = include/bst.h  include/node.h  include/iterator.h include/methods.h 
 
 all: $(EXE)
 
