@@ -1,11 +1,12 @@
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -g -std=c++11 
+IFLAGS = -I include
 
 SRC = main.cpp
 
 EXE = $(SRC:.cpp=.x)
 
-IFLAGS = -I include
+INC = include/bst.h  node/dog.h  include/iterator.h
 
 all: $(EXE)
 
