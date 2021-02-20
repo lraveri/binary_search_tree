@@ -1,5 +1,3 @@
-#include <iterator>
-
 template <typename N, typename P >
 class iterator {
 
