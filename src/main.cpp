@@ -2,7 +2,6 @@
 #include <utility>
 #include <memory>
 #include "bst.cpp"
-#include "../include/iterator.hpp"
 
 int main() {
 
