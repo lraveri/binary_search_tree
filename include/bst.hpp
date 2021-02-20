@@ -1,21 +1,11 @@
-/*
- * bst.h
- *
- *  Created on: 10 feb 2021
- *      Author: LucaRaveri
- */
-
-#ifndef BST_H_
-#define BST_H_
-
 #include <iostream>
 #include <memory>
 #include <vector>
 #include <utility>
 #include <iterator>
 
-#include "node.h"
-#include "iterator.h"
+#include "node.hpp"
+#include "iterator.hpp"
 
 template <class Tk,class Tv,class Tc = std::less<Tk>>
 class bst {
@@ -29,47 +19,68 @@ public:
 
 private:
 
+	// fields
+
 	std::unique_ptr<node_type> root;
 
 	Tc comp;
+
+	// utility methods
 
 	node_type* _begin() const noexcept;
 
 	template <typename T>
 	std::pair<Iterator,bool> _insert(T&& x);
 
+	node_type* _find(const Tk& x);
+
+	void copy(const std::unique_ptr<node_type>& n);
+
+	void helper(std::vector<std::pair<Tk, Tv>>& v,int start, int end);
+
 public:
 
+	// constructors
+
 	bst() noexcept = default;
+
 	bst(std::pair<const Tk,Tv> element): root{new node_type{element}} {};
+
 	explicit bst(Tc x): comp{x}{};
 
-	// TODO: copy semantics
+	// copy semantics
 
-	bst(const bst& tree);
+	bst(const bst& tree) {copy(tree.root);}
 
-	bst& operator=(const bst& tree);
+	bst& operator=(const bst& tree) {
+		clear();
+		copy(tree.root);
+		return *this;
+	}
 
-	// TODO: move semantics
+	// move semantics
 
-	bst(bst&& tree) noexcept;
+	bst(bst&& tree) noexcept : root{std::move(tree.root)} {}
 
-	bst& operator=(bst&&  tree) noexcept;
+	bst& operator=(bst&& tree) noexcept;
 
-	// TODO: subscription operator[]
+	// operator []
 
 	Tv& operator[](const Tk& x);
 
 	Tv& operator[](Tk&& x);
 
+	// operator <<
+
 	friend
 	std::ostream& operator<<(std::ostream& os, const bst& x) {
 		for (const auto& pair : x ) {
-			os << "["<<pair.first<<":"<<pair.second<<"] ";
+			os << "["<<pair.first<<","<<pair.second<<"] ";
 		}
-		os<<std::endl;
 		return os;
 	};
+
+	// begin & end methods
 
 	Iterator begin() noexcept;
 
@@ -83,36 +94,39 @@ public:
 
 	Const_iterator cend() const noexcept { return Const_iterator{nullptr}; };
 
-	// TODO: insert !
+	// insert methods
 
 	std::pair<Iterator, bool> insert(const pair_type& x);
 
 	std::pair<Iterator, bool> insert(pair_type&& x);
 
-	// TODO: emplace
+	// emplace method
 
 	template< class... Types >
-	std::pair<Iterator,bool> emplace(Types&&... args);
+	std::pair<Iterator,bool> emplace(Types&&... args) {
+		return insert(std::make_pair(std::forward<Types>(args)...)); 
+	}
 
-	// TODO: clear !
+	// clear method
 
-	void clear();
+	void clear() noexcept { root.reset(); };
 
-	// TODO: find !
+	// find methods
 
 	Iterator find(const Tk& x);
 
 	Const_iterator find(const Tk& x) const;
 
-	// TODO: balance
+	// balance method
 
 	void balance();
 
-	// TODO: erase
+	// erase method
 
 	void erase(const Tk& x);
 
+	// utility methods
+
+	void printChildren(Tk a);
 
 };
-
-#endif /* BST_H_ */

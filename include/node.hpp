@@ -1,13 +1,3 @@
-/*
- * node.h
- *
- *  Created on: 10 feb 2021
- *      Author: LucaRaveri
- */
-
-#ifndef NODE_H_
-#define NODE_H_
-
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -22,7 +12,7 @@ struct node {
 	std::unique_ptr<node> left;
 	std::unique_ptr<node> right;
 
-	node * parent;					// why raw pointer here?
+	node * parent;					
 
 	node() = default;
 
@@ -34,5 +24,3 @@ struct node {
 
 	~node() noexcept= default;
 };
-
-#endif /* NODE_H_ */

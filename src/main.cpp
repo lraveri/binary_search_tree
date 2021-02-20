@@ -1,5 +1,8 @@
-#include "bst.h"
-#include <string>
+#include <iostream>
+#include <utility>
+#include <memory>
+#include "bst.cpp"
+#include "../include/iterator.hpp"
 
 int main(int argc, char **argv) {
 

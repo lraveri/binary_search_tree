@@ -1,11 +1,5 @@
-/*
- * bst.cpp
- *
- *  Created on: 10 feb 2021
- *      Author: LucaRaveri
- */
-
-#include "bst.h"
+#include <vector>
+#include "../include/bst.hpp"
 
 template <class Tk,class Tv,class Tc>
 typename bst<Tk,Tv,Tc>::node_type*  bst<Tk,Tv,Tc>::_begin() const noexcept {
@@ -52,15 +46,14 @@ std::pair<typename bst<Tk,Tv,Tc>::Iterator, bool> bst<Tk,Tv,Tc>::_insert(T&& x) 
 			} else {
 				node = node->right.get();
 			}
-		} else if (op(x.first, node->elem.first)) {
+		} else if (comp(x.first, node->elem.first)) {
 			if(node->left.get()==nullptr) {
 				node->left.reset(new node_type{std::forward<T>(x),node});
 				return std::make_pair(Iterator{node->right.get()},true);
 			} else {
 				node = node->left.get();
 			}
-		} else {	// usare find all'inizio?
-			std::cout<<"The key: ["<<x.first<<"] is already present"<<std::endl;
+		} else {
 			return std::make_pair(Iterator{node},false);
 		}
 	}
@@ -74,4 +67,151 @@ std::pair<typename bst<Tk,Tv,Tc>::Iterator, bool> bst<Tk,Tv,Tc>::insert(const st
 template <class Tk,class Tv,class Tc>
 std::pair<typename bst<Tk,Tv,Tc>::Iterator, bool> bst<Tk,Tv,Tc>::insert(std::pair<const Tk, Tv>&& x) {
 	return _insert(std::move(x));
+}
+
+template <class Tk,class Tv,class Tc>
+typename bst<Tk,Tv,Tc>::node_type* bst<Tk,Tv,Tc>::_find(const Tk& x) {
+	auto tmp=root.get();
+	while(tmp) {
+		if(!comp(tmp->elem.first, x) && !comp(x,tmp->elem.first))  
+			return tmp;
+		else if(comp(tmp->elem.first,x))                              
+        	tmp=tmp->right.get();
+		else
+			tmp=tmp->left.get();					           
+	}
+	return nullptr;
+}
+
+template <class Tk,class Tv,class Tc>
+typename bst<Tk,Tv,Tc>::Iterator bst<Tk,Tv,Tc>::find(const Tk& x) {
+	auto tmp=_find(x);
+	if(tmp == nullptr) return end();
+	else return Iterator{tmp};
+}
+
+template <class Tk,class Tv,class Tc>
+typename bst<Tk,Tv,Tc>::Const_iterator bst<Tk,Tv,Tc>::find(const Tk& x) const {
+   	auto tmp=_find(x);
+    if(tmp == nullptr) return cend();
+    else return Const_iterator{tmp};
+}
+
+template <class Tk,class Tv,class Tc>
+Tv& bst<Tk,Tv,Tc>::operator[](Tk&& x) {
+	auto it {insert(std::pair<Tk, Tv> {std::move(x),Tv{}}).first};
+	return (*(it)).second;
+}	
+
+template <class Tk,class Tv,class Tc>
+Tv& bst<Tk,Tv,Tc>::operator[](const Tk& x) {
+	auto it {insert(std::pair<Tk, Tv> {x,Tv{}}).first};
+	return (*(it)).second;
+}
+
+template<class Tk, class Tv, class Tc>
+void bst<Tk,Tv,Tc>::copy(const std::unique_ptr<node_type>& n) {
+	if(n) {
+		(void)insert(n->elem);
+		copy(n->left);
+		copy(n->right);
+	}
+}
+
+template<class Tk, class Tv, class Tc>
+bst<Tk, Tv, Tc>& bst<Tk,Tv,Tc>::operator=(bst<Tk, Tv, Tc>&& tree) noexcept {
+	root=std::move(tree.root);
+	return *this;
+}
+
+template <class Tk,class Tv,class Tc>
+void bst<Tk,Tv,Tc>::erase(const Tk& x) {
+	if(!root) return;
+	auto it = find(x);
+	if(it==end()) return;
+	if(!(it.getCurrentNode()->left) && !(it.getCurrentNode()->right)) {
+		if(it == Iterator{it.getCurrentNode()->parent->right.get()}) {
+			it.getCurrentNode()->parent->right.reset();
+		} else {
+			it.getCurrentNode()->parent->left.reset();
+		}
+	}
+	auto n=it.getCurrentNode();
+	if (n->right && n->left) {
+		++it;
+		auto sub =it.getCurrentNode();
+		sub->left = std::move(n->left);
+		sub->left->parent = sub;
+	}
+	if(!(n->parent)) {
+		n->right->parent = nullptr;	
+		root = std::move(n->right);
+	} else {
+		if(n->parent->right.get() == n) {
+			if(n->right) {
+				n->right->parent = n->parent;	
+				n->parent->right=std::move(n->right);
+			} else if (n->left) {
+				n->left->parent= n->parent;
+				n->parent->right=std::move(n->left);
+			}
+		} else {
+			if(n->right) {
+				n->right->parent= n->parent;
+				n->parent->left=std::move(n->right);
+			} else if (n->left) {
+				n->left->parent=n->parent;
+				n->parent->left=std::move(n->left);
+			}			
+		}
+	}
+}
+
+template <class Tk,class Tv,class Tc>
+void bst<Tk,Tv,Tc>::balance() {
+	Iterator it{this->begin()}; 				
+	Iterator end{this->end()};
+	if(it == end){
+		return;
+    } else {											
+		std::vector<std::pair<Tk, Tv>> v;
+	    for(; it != end; ++it) {
+	        v.push_back(*it);
+		}
+	   	this->clear();
+		helper(v, 0, v.size()-1);					
+	}
+}
+
+template <class Tk,class Tv,class Tc>
+void bst<Tk,Tv,Tc>::helper(std::vector<std::pair<Tk, Tv>>& v,int start, int end) {
+	if(start > end) {
+		return;
+	}
+	int mid = (start + end) / 2;
+	insert(v[mid]);
+	helper(v, start, mid - 1);
+	helper(v, mid + 1, end);
+}
+
+template <class Tk, class Tv, class Tc>
+void bst<Tk,Tv,Tc>::printChildren(Tk a) {
+	auto it = bst<Tk,Tv,Tc>::find(a);  
+	auto node = it.getCurrentNode();      																			
+	if (node) {														
+    	std::cout<<"node = " << node->elem.first<<" -> ";		
+    	if(node->left == nullptr) {										
+    		std::cout<<"left child = null, ";
+		} else {						
+    		std::cout<<"left child = "<<node->left->elem.first<<", ";
+		}			
+    	if(node->right == nullptr) {										
+      	std::cout<<"right child = null"<<std::endl;	
+		} else {					
+      	std::cout<<"right child = "<<node->right->elem.first<<std::endl;	
+		}		
+  	}	
+  	else {															
+    	return;
+  	}
 }
