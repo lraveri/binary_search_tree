@@ -5,7 +5,6 @@
 #include <iterator>
 
 #include "node.hpp"
-#include "iterator.hpp"
 
 template <class Tk,class Tv,class Tc = std::less<Tk>>
 class bst {
