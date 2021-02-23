@@ -1,0 +1,62 @@
+\hypertarget{classiterator}{}\doxysection{iterator$<$ N, P $>$ Class Template Reference}
+\label{classiterator}\index{iterator$<$ N, P $>$@{iterator$<$ N, P $>$}}
+
+
+{\ttfamily \#include $<$iterator.\+hpp$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classiterator_a195aaefd209fb2887b55171eaa5425f9}\label{classiterator_a195aaefd209fb2887b55171eaa5425f9}} 
+using {\bfseries value\+\_\+type} = P
+\item 
+\mbox{\Hypertarget{classiterator_a00137e7d52493a29206d14c579df6873}\label{classiterator_a00137e7d52493a29206d14c579df6873}} 
+using {\bfseries reference} = value\+\_\+type \&
+\item 
+\mbox{\Hypertarget{classiterator_a172c169a6a6d2b13e317e93d9eff4b61}\label{classiterator_a172c169a6a6d2b13e317e93d9eff4b61}} 
+using {\bfseries pointer} = value\+\_\+type $\ast$
+\item 
+\mbox{\Hypertarget{classiterator_ae2cab42d8c9f38bcb3e49561cb878d5a}\label{classiterator_ae2cab42d8c9f38bcb3e49561cb878d5a}} 
+using {\bfseries iterator\+\_\+category} = std\+::forward\+\_\+iterator\+\_\+tag
+\item 
+\mbox{\Hypertarget{classiterator_aa9233737f3a87eab18066c189c456ace}\label{classiterator_aa9233737f3a87eab18066c189c456ace}} 
+using {\bfseries difference\+\_\+type} = std\+::ptrdiff\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classiterator_af54c9cd55999a72c9f5c4694fc3aa011}\label{classiterator_af54c9cd55999a72c9f5c4694fc3aa011}} 
+{\bfseries iterator} (N $\ast$n) noexcept
+\item 
+\mbox{\Hypertarget{classiterator_a08fd5b49d980b4d44c651a0822c8416e}\label{classiterator_a08fd5b49d980b4d44c651a0822c8416e}} 
+pointer {\bfseries operator-\/$>$} () const noexcept
+\item 
+\mbox{\Hypertarget{classiterator_aaac658309af3a7405627208a0d3f2825}\label{classiterator_aaac658309af3a7405627208a0d3f2825}} 
+reference {\bfseries operator$\ast$} () const noexcept
+\item 
+\mbox{\Hypertarget{classiterator_a6d4af7ab3d3891aae1dc5b2325131420}\label{classiterator_a6d4af7ab3d3891aae1dc5b2325131420}} 
+\mbox{\hyperlink{classiterator}{iterator}} \& {\bfseries operator++} ()
+\item 
+\mbox{\Hypertarget{classiterator_ae70950ed24e9c99b10a4c56e8c897a1f}\label{classiterator_ae70950ed24e9c99b10a4c56e8c897a1f}} 
+\mbox{\hyperlink{classiterator}{iterator}} {\bfseries operator++} (int)
+\item 
+\mbox{\Hypertarget{classiterator_a22d28d9dd35ed6998bb38a9e7aa9ed1e}\label{classiterator_a22d28d9dd35ed6998bb38a9e7aa9ed1e}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classiterator}{iterator}} \&other)
+\item 
+\mbox{\Hypertarget{classiterator_a9dd561135f752d4d8eb1e41581ed1340}\label{classiterator_a9dd561135f752d4d8eb1e41581ed1340}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{classiterator}{iterator}} \&other)
+\item 
+\mbox{\Hypertarget{classiterator_a90bf5d4c9ea61d2c51fd1085fa54fb91}\label{classiterator_a90bf5d4c9ea61d2c51fd1085fa54fb91}} 
+N $\ast$ {\bfseries get\+Current\+Node} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename N, typename P$>$\newline
+class iterator$<$ N, P $>$}
+
+iterator class 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/iterator.\+hpp\end{DoxyCompactItemize}
