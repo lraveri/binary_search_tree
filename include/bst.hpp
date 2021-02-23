@@ -125,7 +125,7 @@ public:
 
 	void erase(const Tk& x);
 
-	// utility methods
+	// utility method
 
 	void printChildren(Tk a);
 
