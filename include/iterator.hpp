@@ -1,5 +1,8 @@
 #include <iterator>
 
+/**
+ * iterator class
+ */
 template <typename N, typename P >
 class iterator {
 

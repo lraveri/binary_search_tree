@@ -7,6 +7,9 @@
 #include "node.hpp"
 #include "iterator.hpp"
 
+/**
+ * class that implements a binary search tree
+ */
 template <class Tk,class Tv,class Tc = std::less<Tk>>
 class bst {
 

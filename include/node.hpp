@@ -2,6 +2,9 @@
 #include <memory>
 #include <utility>
 
+/**
+ * struct that implements a node of the tree.
+ */
 template <typename T>
 struct node {
 
