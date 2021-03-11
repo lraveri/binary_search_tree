@@ -1,3 +1,5 @@
 .DS_Store
 .project
 .cproject
+src/.DS_Store
+include/.DS_Store
