@@ -4,7 +4,7 @@ To create the executable, use the command:
 
 *make*
 
-To run the executable, go to the directory src and use the command:
+To run the executable, go to the directory *src* and use the command:
 
 *./main.x*
 
