@@ -6,6 +6,8 @@ make
 
 How to run the executable
 
+cd src
+
 ./main.x
 
 How to create the documentation
