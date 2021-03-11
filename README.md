@@ -1,4 +1,4 @@
-# Binary search ree
+# Binary search tree
 
 How to create the executable
 
