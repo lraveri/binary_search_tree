@@ -3,7 +3,7 @@
 
 template <class Tk,class Tv,class Tc>
 typename bst<Tk,Tv,Tc>::node_type*  bst<Tk,Tv,Tc>::_begin() const noexcept {
-	if(root!=nullptr) {
+	if(root) {
 		node_type* n = root.get();
 		while(n->left) {
 			n = n->left.get();
@@ -40,14 +40,14 @@ std::pair<typename bst<Tk,Tv,Tc>::Iterator, bool> bst<Tk,Tv,Tc>::_insert(T&& x) 
 	node_type * node = root.get();
 	while(true) {
 		if(comp(node->elem.first, x.first)) {
-			if(node->right.get()==nullptr) {
+			if(!(node->right.get())) {
 				node->right.reset(new node_type{std::forward<T>(x),node});
 				return std::make_pair(Iterator{node->right.get()},true);
 			} else {
 				node = node->right.get();
 			}
 		} else if (comp(x.first, node->elem.first)) {
-			if(node->left.get()==nullptr) {
+			if(!(node->left.get())) {
 				node->left.reset(new node_type{std::forward<T>(x),node});
 				return std::make_pair(Iterator{node->right.get()},true);
 			} else {
@@ -86,14 +86,14 @@ typename bst<Tk,Tv,Tc>::node_type* bst<Tk,Tv,Tc>::_find(const Tk& x) {
 template <class Tk,class Tv,class Tc>
 typename bst<Tk,Tv,Tc>::Iterator bst<Tk,Tv,Tc>::find(const Tk& x) {
 	auto tmp=_find(x);
-	if(tmp == nullptr) return end();
+	if(!tmp) return end();
 	else return Iterator{tmp};
 }
 
 template <class Tk,class Tv,class Tc>
 typename bst<Tk,Tv,Tc>::Const_iterator bst<Tk,Tv,Tc>::find(const Tk& x) const {
    	auto tmp=_find(x);
-    if(tmp == nullptr) return cend();
+    if(!tmp) return cend();
     else return Const_iterator{tmp};
 }
 
@@ -179,19 +179,19 @@ void bst<Tk,Tv,Tc>::balance() {
 	        v.push_back(*it);
 		}
 	   	this->clear();
-		helper(v, 0, v.size()-1);					
+		recursive_method(v, 0, v.size()-1);					
 	}
 }
 
 template <class Tk,class Tv,class Tc>
-void bst<Tk,Tv,Tc>::helper(std::vector<std::pair<Tk, Tv>>& v,int start, int end) {
+void bst<Tk,Tv,Tc>::recursive_method(std::vector<std::pair<Tk, Tv>>& v,int start, int end) {
 	if(start > end) {
 		return;
 	}
 	int mid = (start + end) / 2;
 	insert(v[mid]);
-	helper(v, start, mid - 1);
-	helper(v, mid + 1, end);
+	recursive_method(v, start, mid - 1);
+	recursive_method(v, mid + 1, end);
 }
 
 template <class Tk, class Tv, class Tc>
@@ -200,12 +200,12 @@ void bst<Tk,Tv,Tc>::printChildren(Tk a) {
 	auto node = it.getCurrentNode();      																			
 	if (node) {														
     	std::cout<<"node = " << node->elem.first<<" -> ";		
-    	if(node->left == nullptr) {										
+    	if(!(node->left)) {										
     		std::cout<<"left child = null, ";
 		} else {						
     		std::cout<<"left child = "<<node->left->elem.first<<", ";
 		}			
-    	if(node->right == nullptr) {										
+    	if(!(node->right)) {										
       	std::cout<<"right child = null"<<std::endl;	
 		} else {					
       	std::cout<<"right child = "<<node->right->elem.first<<std::endl;	

@@ -39,7 +39,7 @@ private:
 
 	void copy(const std::unique_ptr<node_type>& n);
 
-	void helper(std::vector<std::pair<Tk, Tv>>& v,int start, int end);
+	void recursive_method(std::vector<std::pair<Tk, Tv>>& v,int start, int end);
 
 public:
 
