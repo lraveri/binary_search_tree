@@ -1,15 +1,13 @@
 # Binary Search Tree
 
-How to create the executable
+To create the executable, use the command make
 
 make
 
-How to run the executable
-
-cd src
+To run the executable, go to the directory src and use the command
 
 ./main.x
 
-How to create the documentation
+To create the documentation, use the command
 
 doxygen Doxygen/doxy.in
