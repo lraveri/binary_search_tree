@@ -26,7 +26,7 @@ int main() {
     tree.insert(pair5);
     tree.insert(pair6);
     tree.insert(pair7);
-    tree.insert(pair8);
+	tree.insert(pair8);
 
     std::cout<<"Expected:"<<std::endl;
 	std::cout<<"[1,1] [3,1] [4,1] [6,1] [7,1] [8,1] [10,1] [14,1]"<<std::endl;
