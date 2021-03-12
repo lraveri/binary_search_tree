@@ -210,8 +210,6 @@ void bst<Tk,Tv,Tc>::printChildren(Tk a) {
 		} else {					
       	std::cout<<"right child = "<<node->right->elem.first<<std::endl;	
 		}		
-  	}	
-  	else {															
-    	return;
-  	}
+  	}																
+    return;
 }
