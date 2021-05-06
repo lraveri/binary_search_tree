@@ -28,7 +28,7 @@ private:
 
 	Tc comp;
 
-	// utility methods
+	// auxiliary methods
 
 	node_type* _begin() const noexcept;
 
@@ -39,7 +39,7 @@ private:
 
 	void copy(const std::unique_ptr<node_type>& n);
 
-	void recursive_method(std::vector<std::pair<Tk, Tv>>& v,int start, int end);
+	void balance_aux(std::vector<std::pair<Tk, Tv>>& v,int start, int end);
 
 public:
 

@@ -179,19 +179,20 @@ void bst<Tk,Tv,Tc>::balance() {
 	        v.push_back(*it);
 		}
 	   	this->clear();
-		recursive_method(v, 0, v.size()-1);					
+		balance_aux(v, 0, v.size()-1);					
 	}
 }
 
+// recursive auxiliary method for balance
 template <class Tk,class Tv,class Tc>
-void bst<Tk,Tv,Tc>::recursive_method(std::vector<std::pair<Tk, Tv>>& v,int start, int end) {
+void bst<Tk,Tv,Tc>::balance_aux(std::vector<std::pair<Tk, Tv>>& v,int start, int end) {
 	if(start > end) {
 		return;
 	}
 	int mid = (start + end) / 2;
 	insert(v[mid]);
-	recursive_method(v, start, mid - 1);
-	recursive_method(v, mid + 1, end);
+	balance_aux(v, start, mid - 1);
+	balance_aux(v, mid + 1, end);
 }
 
 template <class Tk, class Tv, class Tc>
