@@ -6,9 +6,9 @@
 template <typename N, typename P >
 class iterator {
 
-	N * current;
-
 public:
+
+	N * current;
 
 	using value_type= P;
 	using reference=value_type&;
