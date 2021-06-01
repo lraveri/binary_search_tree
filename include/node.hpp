@@ -19,11 +19,11 @@ struct node {
 
 	node() = default;
 
-	node(T e): elem{e},left{nullptr},right{nullptr},parent{nullptr} {};
+	// node(T e): elem{e},left{nullptr},right{nullptr},parent{nullptr} {};
 
 	node(T e, node * p): elem{e},left{nullptr},right{nullptr},parent{p} {};
 
-	node(const node& n) : elem{n.elem}, left{nullptr}, right{nullptr}, parent{n.parent} {}
+	// node(const node& n) : elem{n.elem}, left{nullptr}, right{nullptr}, parent{n.parent} {}
 
 	~node() noexcept= default;
 };
