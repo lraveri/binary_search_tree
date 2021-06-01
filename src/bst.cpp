@@ -133,7 +133,7 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 
 	if(it==end()) return;                                // Case: the node is not present in the bst
 
-    auto n=i.current;     
+    auto n=it.current;     
 
 	if(!(n->left) && !(n->right)) {                     // Case: the node is a leaf
 		if(n->parent->right.get() == n) {               // Sub case: the node is the right child of the parent
@@ -220,7 +220,7 @@ void bst<Tk,Tv,Tc>::printNode(Tk a) {
       	std::cout<<"right child = "<<n->right->elem.first<<", ";	
 		}		
 		if(!(n->parent)) {
-			std::cout<<"parent = null"<<std::endl
+			std::cout<<"parent = null"<<std::endl;
 		} else {
 			std::cout<<"parent = "<<n->parent->elem.first<<std::endl;
 		}
