@@ -169,7 +169,7 @@ int main() {
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::cout<<"Expected:"<<std::endl;
-	std::cout<<"[1,1] [3,1] [4,1] [6,1] [7,1] [8,1] [14,1]"<<std::endl;
+	std::cout<<"[1,1] [3,1] [4,1] [6,1] [7,1] [10,1] [14,1]"<<std::endl;
 	std::cout<<"Result:"<<std::endl;
 
 	tree.insert(pair1);
@@ -190,10 +190,12 @@ int main() {
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::cout<<"Expected:"<<std::endl;
-	std::cout<<"node = 8 -> left child = 3, right child = 14"<<std::endl;
+	std::cout<<"node = 1 -> left child = null, right child = 10"<<std::endl;
+	std::cout<<"node = 10 -> left child = 3, right child = 14"<<std::endl;
 	std::cout<<"Result:"<<std::endl;
 
-	tree.printChildren(8);
+	tree.printChildren(1);
+	tree.printChildren(10);
 
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: balance"<<std::endl;
