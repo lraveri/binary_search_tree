@@ -25,7 +25,5 @@ struct node {
 
 	node(const node& n) : elem{n.elem}, left{nullptr}, right{nullptr}, parent{n.parent} {}
 
-	node(node&& n) = default;
-
 	~node() noexcept= default;
 };
