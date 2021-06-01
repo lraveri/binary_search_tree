@@ -146,30 +146,36 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 	if (n->right && n->left) {                          // Case: the node has two children   
         ++i;
         auto next = i.current;
-        next->left = std::move(n->left);  
+        //next->left = std::move(n->left);  
+		next->left = n->left;
         next->left->parent = next;
         n->right->parent = n->parent;
 	}
 
 	if(!(n->parent)) {                                  // Case: the node is the root
 		n->right->parent = nullptr;	
-		root = std::move(n->right);
+		//root = std::move(n->right);
+		root = n->right;
 	} else {                                            // Case: the node has one child  
 		if(n->parent->right.get() == n) {               // Sub case: the node is the right child of the parent
 			if(n->right) {                              // Sub case: the node has a right child
 				n->right->parent = n->parent;	
-				n->parent->right=std::move(n->right);
+				//n->parent->right=std::move(n->right);
+				n->parent->right=n->right;
 			} else if (n->left) {                       // Sub case: the node has a left child
 				n->left->parent= n->parent;
-				n->parent->right=std::move(n->left);
+				//n->parent->right=std::move(n->left);
+				n->parent->right=n->left;
 			}
 		} else {                                        // Sub case: the node is the left child of the parent
 			if(n->right) {                              // Sub case: the node has a right child
 				n->right->parent= n->parent;
-				n->parent->left=std::move(n->right);
+				//n->parent->left=std::move(n->right);
+				n->parent->left=n->right;
 			} else if (n->left) {                       // Sub case: the node has a left child
 				n->left->parent=n->parent;
-				n->parent->left=std::move(n->left);
+				//n->parent->left=std::move(n->left);
+				n->parent->left=n->left;
 			}			
 		}
 	}
