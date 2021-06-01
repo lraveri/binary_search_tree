@@ -233,7 +233,7 @@ int main() {
 	tree.emplace(5,2);
 
 	std::cout<<"Expected:"<<std::endl;
-	std::cout<<"[1,1] [3,1] [4,1] [5,2] [6,1] [7,1] [8,1] [14,1]"<<std::endl;
+	std::cout<<"[1,1] [3,1] [4,1] [5,2] [6,1] [7,1] [10,1] [14,1]"<<std::endl;
 	std::cout<<"Result:"<<std::endl;
 	std::cout<<tree<<std::endl;
 
