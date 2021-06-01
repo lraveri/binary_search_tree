@@ -30,7 +30,7 @@ private:
 
 	// auxiliary methods
 
-	node_type* _begin() const noexcept;
+	//node_type* _begin() const noexcept;
 
 	template <typename T>
 	std::pair<Iterator,bool> _insert(T&& x);
@@ -51,11 +51,21 @@ public:
 
 	explicit bst(Tc x): comp{x}{};
 
-	~bst() noexcept = default;
+	// move constructor
 
-	// copy semantics
+	//bst(bst&& tree) noexcept : root{std::move(tree.root)} {}
+
+	bst(bst&& tree) = default;
+
+	// copy constructor
 
 	bst(const bst& tree) {copy(tree.root);}
+
+	// destructor
+
+	~bst() noexcept = default;
+
+	// copy assignment
 
 	bst& operator=(const bst& tree) {
 		clear();
@@ -63,11 +73,11 @@ public:
 		return *this;
 	}
 
-	// move semantics
+	// move assignment
 
-	bst(bst&& tree) noexcept : root{std::move(tree.root)} {}
+	//bst& operator=(bst&& tree) noexcept;
 
-	bst& operator=(bst&& tree) noexcept;
+	bst& operator=(bst&& tree) = default;
 
 	// operator []
 
