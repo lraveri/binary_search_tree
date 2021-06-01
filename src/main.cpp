@@ -190,8 +190,8 @@ int main() {
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::cout<<"Expected:"<<std::endl;
-	std::cout<<"node = 1 -> left child = null, right child = 10"<<std::endl;
-	std::cout<<"node = 10 -> left child = 3, right child = 14"<<std::endl;
+	std::cout<<"node = 1 -> left child = null, right child = 10, parent = null"<<std::endl;
+	std::cout<<"node = 10 -> left child = 3, right child = 14, parent = 1"<<std::endl;
 	std::cout<<"Result:"<<std::endl;
 
 	tree.printNode(1);
