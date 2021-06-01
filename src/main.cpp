@@ -181,7 +181,7 @@ int main() {
 	tree.insert(pair7);
 	tree.insert(pair8);
 
-	tree.erase(10);
+	tree.erase(8);
 
 	std::cout<<tree<<std::endl;
 
