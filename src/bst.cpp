@@ -2,32 +2,43 @@
 #include "../include/bst.hpp"
 
 template <class Tk,class Tv,class Tc>
-typename bst<Tk,Tv,Tc>::node_type*  bst<Tk,Tv,Tc>::_begin() const noexcept {
+typename bst<Tk,Tv,Tc>::Iterator bst<Tk,Tv,Tc>::begin() noexcept {
 	if(root) {
 		node_type* n = root.get();
 		while(n->left) {
 			n = n->left.get();
 		}
-        return n;
+        return Iterator{n};
     } else {
-        return nullptr;
+        return Iterator{nullptr};
     }
 }
 
 template <class Tk,class Tv,class Tc>
-typename bst<Tk,Tv,Tc>::Iterator bst<Tk,Tv,Tc>::begin() noexcept {
-        return Iterator{_begin()};
-}
-
-template <class Tk,class Tv,class Tc>
 typename bst<Tk,Tv,Tc>::Const_iterator bst<Tk,Tv,Tc>::begin() const noexcept {
-            return Const_iterator{_begin()};
+	if(root) {
+		node_type* n = root.get();
+		while(n->left) {
+			n = n->left.get();
+		}
+        return Const_iterator{n};
+    } else {
+        return Const_iterator{nullptr};
+    }
 
 }
 
 template <class Tk,class Tv,class Tc>
 typename bst<Tk,Tv,Tc>::Const_iterator bst<Tk,Tv,Tc>::cbegin() const noexcept {
-	return Const_iterator{_begin()};
+	if(root) {
+		node_type* n = root.get();
+		while(n->left) {
+			n = n->left.get();
+		}
+        return Const_iterator{n};
+    } else {
+        return Const_iterator{nullptr};
+    }
 }
 
 template <class Tk,class Tv,class Tc>
@@ -146,9 +157,9 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 	if (n->right && n->left) {                          // Case: the node has two children   
         ++it;
         auto next = it.current;
-        next->left = std::move(n->left);  
-        next->left->parent = next;
+		next->left->parent = next;
         n->right->parent = n->parent;
+        next->left = std::move(n->left);  
 	}
 
 	if(!(n->parent)) {                                  // Case: the node is the root
@@ -156,18 +167,18 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 		root = std::move(n->right);
 	} else {                                            // Case: the node has one child  
 		if(n->parent->right.get() == n) {               // Sub case: the node is the right child of the parent
-			if(n->right) {                              // Sub case: the node has a right child
+			if(n->right) {                              	// Sub case: the node has a right child
 				n->right->parent = n->parent;	
 				n->parent->right=std::move(n->right);
-			} else if (n->left) {                       // Sub case: the node has a left child
+			} else if (n->left) {                       	// Sub case: the node has a left child
 				n->left->parent= n->parent;
 				n->parent->right=std::move(n->left);
 			}
 		} else {                                        // Sub case: the node is the left child of the parent
-			if(n->right) {                              // Sub case: the node has a right child
+			if(n->right) {                              	// Sub case: the node has a right child
 				n->right->parent= n->parent;
 				n->parent->left=std::move(n->right);
-			} else if (n->left) {                       // Sub case: the node has a left child
+			} else if (n->left) {                       	// Sub case: the node has a left child
 				n->left->parent=n->parent;
 				n->parent->left=std::move(n->left);
 			}			
