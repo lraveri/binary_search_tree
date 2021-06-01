@@ -126,40 +126,48 @@ bst<Tk, Tv, Tc>& bst<Tk,Tv,Tc>::operator=(bst<Tk, Tv, Tc>&& tree) noexcept {
 
 template <class Tk,class Tv,class Tc>
 void bst<Tk,Tv,Tc>::erase(const Tk& x) {
-	if(!root) return;
-	auto it = find(x);
-	if(it==end()) return;
-	if(!(it.getCurrentNode()->left) && !(it.getCurrentNode()->right)) {
-		if(it == Iterator{it.getCurrentNode()->parent->right.get()}) {
-			it.getCurrentNode()->parent->right.reset();
-		} else {
-			it.getCurrentNode()->parent->left.reset();
+
+	if(!root) return;                                   // Case: empty bst
+
+	auto i = find(x);
+
+	if(i==end()) return;                                // Case: the node is not present in the bst
+
+    auto n=i.current;     
+
+	if(!(n->left) && !(n->right)) {                     // Case: the node is a leaf
+		if(n->parent->right.get() == n) {               // Sub case: the node is the right child of the parent
+			n->parent->right.reset();
+		} else {                                        // Sub case: the node is the left child of the parent
+			n->parent->left.reset();
 		}
 	}
-	auto n=it.getCurrentNode();
-	if (n->right && n->left) {
-		++it;
-		auto sub =it.getCurrentNode();
-		sub->left = std::move(n->left);
-		sub->left->parent = sub;
+
+	if (n->right && n->left) {                          // Case: the node has two children   
+        ++i;
+        auto next = i.current;
+        next->left = std::move(n->left);  
+        next->left->parent = next;
+        n->right->parent = n->parent;
 	}
-	if(!(n->parent)) {
+
+	if(!(n->parent)) {                                  // Case: the node is the root
 		n->right->parent = nullptr;	
 		root = std::move(n->right);
-	} else {
-		if(n->parent->right.get() == n) {
-			if(n->right) {
+	} else {                                            // Case: the node has one child  
+		if(n->parent->right.get() == n) {               // Sub case: the node is the right child of the parent
+			if(n->right) {                              // Sub case: the node has a right child
 				n->right->parent = n->parent;	
 				n->parent->right=std::move(n->right);
-			} else if (n->left) {
+			} else if (n->left) {                       // Sub case: the node has a left child
 				n->left->parent= n->parent;
 				n->parent->right=std::move(n->left);
 			}
-		} else {
-			if(n->right) {
+		} else {                                        // Sub case: the node is the left child of the parent
+			if(n->right) {                              // Sub case: the node has a right child
 				n->right->parent= n->parent;
 				n->parent->left=std::move(n->right);
-			} else if (n->left) {
+			} else if (n->left) {                       // Sub case: the node has a left child
 				n->left->parent=n->parent;
 				n->parent->left=std::move(n->left);
 			}			
