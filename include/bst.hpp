@@ -51,6 +51,8 @@ public:
 
 	explicit bst(Tc x): comp{x}{};
 
+	~bst() noexcept = default;
+
 	// copy semantics
 
 	bst(const bst& tree) {copy(tree.root);}
