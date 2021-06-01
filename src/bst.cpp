@@ -129,11 +129,11 @@ void bst<Tk,Tv,Tc>::copy(const std::unique_ptr<node_type>& n) {
 	}
 }
 
-template<class Tk, class Tv, class Tc>
-bst<Tk, Tv, Tc>& bst<Tk,Tv,Tc>::operator=(bst<Tk, Tv, Tc>&& tree) noexcept {
-	root=std::move(tree.root);
-	return *this;
-}
+// template<class Tk, class Tv, class Tc>
+// bst<Tk, Tv, Tc>& bst<Tk,Tv,Tc>::operator=(bst<Tk, Tv, Tc>&& tree) noexcept {
+// 	root=std::move(tree.root);
+// 	return *this;
+// }
 
 template <class Tk,class Tv,class Tc>
 void bst<Tk,Tv,Tc>::erase(const Tk& x) {
