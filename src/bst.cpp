@@ -112,7 +112,7 @@ Tv& bst<Tk,Tv,Tc>::operator[](const Tk& x) {
 template<class Tk, class Tv, class Tc>
 void bst<Tk,Tv,Tc>::copy(const std::unique_ptr<node_type>& n) {
 	if(n) {
-		(void)insert(n->elem);
+		insert(n->elem);
 		copy(n->left);
 		copy(n->right);
 	}
@@ -177,14 +177,14 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 
 template <class Tk,class Tv,class Tc>
 void bst<Tk,Tv,Tc>::balance() {
-	Iterator it{this->begin()}; 				
+	Iterator i{this->begin()}; 				
 	Iterator end{this->end()};
-	if(it == end){
+	if(i == end){
 		return;
     } else {											
 		std::vector<std::pair<Tk, Tv>> v;
-	    for(; it != end; ++it) {
-	        v.push_back(*it);
+	    for(; i != end; ++i) {
+	        v.push_back(*i);
 		}
 	   	this->clear();
 		balance_aux(v, 0, v.size()-1);					
@@ -206,18 +206,18 @@ void bst<Tk,Tv,Tc>::balance_aux(std::vector<std::pair<Tk, Tv>>& v,int start, int
 template <class Tk, class Tv, class Tc>
 void bst<Tk,Tv,Tc>::printChildren(Tk a) {
 	auto i = bst<Tk,Tv,Tc>::find(a);  
-	auto node = i.current;      																			
-	if (node) {														
-    	std::cout<<"node = " << node->elem.first<<" -> ";		
-    	if(!(node->left)) {										
+	auto n = i.current;      																			
+	if (n) {														
+    	std::cout<<"node = " << n->elem.first<<" -> ";		
+    	if(!(n->left)) {										
     		std::cout<<"left child = null, ";
 		} else {						
-    		std::cout<<"left child = "<<node->left->elem.first<<", ";
+    		std::cout<<"left child = "<<n->left->elem.first<<", ";
 		}			
-    	if(!(node->right)) {										
+    	if(!(n->right)) {										
       	std::cout<<"right child = null"<<std::endl;	
 		} else {					
-      	std::cout<<"right child = "<<node->right->elem.first<<std::endl;	
+      	std::cout<<"right child = "<<n->right->elem.first<<std::endl;	
 		}		
   	}																
     return;
