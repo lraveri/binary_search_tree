@@ -157,9 +157,9 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 	if (n->right && n->left) {                          // Case: the node has two children   
         ++it;
         auto next = it.current;
-		next->left->parent = next;
-        n->right->parent = n->parent;
         next->left = std::move(n->left);  
+        next->left->parent = next;
+        n->right->parent = n->parent;
 	}
 
 	if(!(n->parent)) {                                  // Case: the node is the root
