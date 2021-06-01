@@ -46,7 +46,7 @@ template <typename T>
 std::pair<typename bst<Tk,Tv,Tc>::Iterator, bool> bst<Tk,Tv,Tc>::_insert(T&& x) {
 	if(!root){
 		//root.reset(new node_type{std::forward<T>(x)});
-		root.reset(new node(x));
+		root.reset(new node_type(x));
 		return std::make_pair(Iterator{root.get()},true);
 	}
 	node_type * node = root.get();
@@ -54,7 +54,7 @@ std::pair<typename bst<Tk,Tv,Tc>::Iterator, bool> bst<Tk,Tv,Tc>::_insert(T&& x) 
 		if(comp(node->elem.first, x.first)) {
 			if(!(node->right.get())) {
 				//node->right.reset(new node_type{std::forward<T>(x),node});
-				node->right.reset(new node(x,node));
+				node->right.reset(new node_type(x,node));
 				return std::make_pair(Iterator{node->right.get()},true);
 			} else {
 				node = node->right.get();
@@ -62,7 +62,7 @@ std::pair<typename bst<Tk,Tv,Tc>::Iterator, bool> bst<Tk,Tv,Tc>::_insert(T&& x) 
 		} else if (comp(x.first, node->elem.first)) {
 			if(!(node->left.get())) {
 				//node->left.reset(new node_type{std::forward<T>(x),node});
-				node->left.reset(new node(x,node));
+				node->left.reset(new node_type(x,node));
 				return std::make_pair(Iterator{node->right.get()},true);
 			} else {
 				node = node->left.get();
