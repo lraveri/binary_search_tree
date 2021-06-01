@@ -186,7 +186,7 @@ int main() {
 	std::cout<<tree<<std::endl;
 
 	std::cout<<"******************************************************************************"<<std::endl;
-	std::cout<<"Test: printChildren"<<std::endl;
+	std::cout<<"Test: printNode"<<std::endl;
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::cout<<"Expected:"<<std::endl;
@@ -194,8 +194,8 @@ int main() {
 	std::cout<<"node = 10 -> left child = 3, right child = 14"<<std::endl;
 	std::cout<<"Result:"<<std::endl;
 
-	tree.printChildren(1);
-	tree.printChildren(10);
+	tree.printNode(1);
+	tree.printNode(10);
 
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: balance"<<std::endl;
@@ -206,25 +206,25 @@ int main() {
 
 	std::cout<<"Tree before balance invocation:"<<std::endl;
 
-	tree.printChildren(1);
-	tree.printChildren(3);
-	tree.printChildren(4);
-	tree.printChildren(6);
-	tree.printChildren(7);
-	tree.printChildren(8);
-	tree.printChildren(14);
+	tree.printNode(1);
+	tree.printNode(3);
+	tree.printNode(4);
+	tree.printNode(6);
+	tree.printNode(7);
+	tree.printNode(8);
+	tree.printNode(14);
 
 	tree.balance();
 
 	std::cout<<"Tree after balance invocation:"<<std::endl;
 
-	tree.printChildren(1);
-	tree.printChildren(3);
-	tree.printChildren(4);
-	tree.printChildren(6);
-	tree.printChildren(7);
-	tree.printChildren(8);
-	tree.printChildren(14);
+	tree.printNode(1);
+	tree.printNode(3);
+	tree.printNode(4);
+	tree.printNode(6);
+	tree.printNode(7);
+	tree.printNode(8);
+	tree.printNode(14);
 
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: emplace"<<std::endl;

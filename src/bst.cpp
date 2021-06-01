@@ -129,9 +129,9 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 
 	if(!root) return;                                   // Case: empty bst
 
-	auto i = find(x);
+	auto it = find(x);
 
-	if(i==end()) return;                                // Case: the node is not present in the bst
+	if(it==end()) return;                                // Case: the node is not present in the bst
 
     auto n=i.current;     
 
@@ -144,8 +144,8 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 	}
 
 	if (n->right && n->left) {                          // Case: the node has two children   
-        ++i;
-        auto next = i.current;
+        ++it;
+        auto next = it.current;
         next->left = std::move(n->left);  
         next->left->parent = next;
         n->right->parent = n->parent;
@@ -177,14 +177,14 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 
 template <class Tk,class Tv,class Tc>
 void bst<Tk,Tv,Tc>::balance() {
-	Iterator i{this->begin()}; 				
+	Iterator it{this->begin()}; 				
 	Iterator end{this->end()};
-	if(i == end){
+	if(it == end){
 		return;
     } else {											
 		std::vector<std::pair<Tk, Tv>> v;
-	    for(; i != end; ++i) {
-	        v.push_back(*i);
+	    for(; it != end; ++it) {
+	        v.push_back(*it);
 		}
 	   	this->clear();
 		balance_aux(v, 0, v.size()-1);					
@@ -204,9 +204,9 @@ void bst<Tk,Tv,Tc>::balance_aux(std::vector<std::pair<Tk, Tv>>& v,int start, int
 }
 
 template <class Tk, class Tv, class Tc>
-void bst<Tk,Tv,Tc>::printChildren(Tk a) {
-	auto i = bst<Tk,Tv,Tc>::find(a);  
-	auto n = i.current;      																			
+void bst<Tk,Tv,Tc>::printNode(Tk a) {
+	auto it = bst<Tk,Tv,Tc>::find(a);  
+	auto n = it.current;      																			
 	if (n) {														
     	std::cout<<"node = " << n->elem.first<<" -> ";		
     	if(!(n->left)) {										
@@ -215,10 +215,15 @@ void bst<Tk,Tv,Tc>::printChildren(Tk a) {
     		std::cout<<"left child = "<<n->left->elem.first<<", ";
 		}			
     	if(!(n->right)) {										
-      	std::cout<<"right child = null"<<std::endl;	
+      	std::cout<<"right child = null, ";	
 		} else {					
-      	std::cout<<"right child = "<<n->right->elem.first<<std::endl;	
+      	std::cout<<"right child = "<<n->right->elem.first<<", ";	
 		}		
+		if(!(n->parent)) {
+			std::cout<<"parent = null"<<std::endl
+		} else {
+			std::cout<<"parent = "<<n->parent->elem.first<<std::endl;
+		}
   	}																
     return;
 }

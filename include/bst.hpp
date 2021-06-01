@@ -128,8 +128,8 @@ public:
 
 	void erase(const Tk& x);
 
-	// utility method
+	// debug method
 
-	void printChildren(Tk a);
+	void printNode(Tk a);
 
 };
