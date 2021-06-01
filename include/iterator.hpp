@@ -53,6 +53,4 @@ public:
 
 	bool operator!=(const iterator& other) { return current != other.current; }
 
-	N * getCurrentNode() { return current; }
-
 };

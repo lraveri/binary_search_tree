@@ -205,8 +205,8 @@ void bst<Tk,Tv,Tc>::balance_aux(std::vector<std::pair<Tk, Tv>>& v,int start, int
 
 template <class Tk, class Tv, class Tc>
 void bst<Tk,Tv,Tc>::printChildren(Tk a) {
-	auto it = bst<Tk,Tv,Tc>::find(a);  
-	auto node = it.getCurrentNode();      																			
+	auto i = bst<Tk,Tv,Tc>::find(a);  
+	auto node = i.current;      																			
 	if (node) {														
     	std::cout<<"node = " << node->elem.first<<" -> ";		
     	if(!(node->left)) {										
