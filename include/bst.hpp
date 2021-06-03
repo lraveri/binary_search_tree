@@ -32,10 +32,10 @@ private:
 
 	//node_type* _begin() const noexcept;
 
-	template <typename T>
-	std::pair<Iterator,bool> _insert(T&& x);
+	// template <typename T>
+	// std::pair<Iterator,bool> _insert(T&& x);
 
-	node_type* _find(const Tk& x);
+	// node_type* _find(const Tk& x);
 
 	void copy(const std::unique_ptr<node_type>& n);
 
@@ -52,8 +52,6 @@ public:
 	explicit bst(Tc x): comp{x}{};
 
 	// move constructor
-
-	//bst(bst&& tree) noexcept : root{std::move(tree.root)} {}
 
 	bst(bst&& tree) = default;
 
@@ -74,8 +72,6 @@ public:
 	}
 
 	// move assignment
-
-	//bst& operator=(bst&& tree) noexcept;
 
 	bst& operator=(bst&& tree) = default;
 
