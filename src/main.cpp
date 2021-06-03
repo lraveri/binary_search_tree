@@ -7,7 +7,7 @@ int main() {
 
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: Constructors & insert"<<std::endl;
-	std::cout<<"we construct a tree of int, we insert some values and we print the tree."<<std::endl;
+	//std::cout<<"we construct a tree of int, we insert some values and we print the tree."<<std::endl;
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::pair<const int, int> pair1{1,1};
@@ -35,7 +35,7 @@ int main() {
 
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: insert"<<std::endl;
-	std::cout<<"we insert a key already present in the tree."<<std::endl;
+	//std::cout<<"we insert a key already present in the tree."<<std::endl;
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::cout<<"Expected:"<<std::endl;
@@ -48,7 +48,7 @@ int main() {
 
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: find"<<std::endl;
-	std::cout<<"we find a key already present in the tree."<<std::endl;
+	//std::cout<<"we find a key already present in the tree."<<std::endl;
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::cout<<"Expected:"<<std::endl;
@@ -64,7 +64,7 @@ int main() {
 
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: find"<<std::endl;
-	std::cout<<"we try to find a key that is not present in the tree."<<std::endl;
+	//std::cout<<"we try to find a key that is not present in the tree."<<std::endl;
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::cout<<"Expected:"<<std::endl;
@@ -80,7 +80,7 @@ int main() {
 
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: operator[]"<<std::endl;
-	std::cout<<"we access to a value throught the [] operator."<<std::endl;
+	//std::cout<<"we access to a value throught the [] operator."<<std::endl;
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::cout<<"Expected:"<<std::endl;
@@ -93,9 +93,17 @@ int main() {
 	auto value = tree[key3];
 	std::cout<<value<<std::endl;
 
+	std::cout<<"Expected:"<<std::endl;
+	std::cout<<"0"<<std::endl;
+	std::cout<<"Result:"<<std::endl;
+
+	int key4{88};
+	auto new_val = tree[key4];
+	std::cout<<new_val<<std::endl;
+
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: clear"<<std::endl;	
-	std::cout<<"we clear the tree, than we insert a new element."<<std::endl;
+	//std::cout<<"we clear the tree, than we insert a new element."<<std::endl;
 	std::cout<<"******************************************************************************"<<std::endl;
 
 	std::cout<<"Expected:"<<std::endl;
@@ -145,24 +153,24 @@ int main() {
 	std::cout<<"Result:"<<std::endl;
 	std::cout<<tree3<<std::endl;
 
-	std::cout<<"******************************************************************************"<<std::endl;
-	std::cout<<"Test: move semantics."<<std::endl;
-	std::cout<<"******************************************************************************"<<std::endl;
+	// std::cout<<"******************************************************************************"<<std::endl;
+	// std::cout<<"Test: move semantics."<<std::endl;
+	// std::cout<<"******************************************************************************"<<std::endl;
 
-	bst<int,int> tree4{std::move(tree)};
-	tree.clear();
-	std::cout<<"Expected:"<<std::endl;
-	std::cout<<"[1,1] [3,1] [4,1] [6,1] [7,1] [8,1] [10,1] [14,1]"<<std::endl;
-	std::cout<<"Result:"<<std::endl;
-	std::cout<<tree4<<std::endl;
+	// bst<int,int> tree4{std::move(tree)};
+	// tree.clear();
+	// std::cout<<"Expected:"<<std::endl;
+	// std::cout<<"[1,1] [3,1] [4,1] [6,1] [7,1] [8,1] [10,1] [14,1]"<<std::endl;
+	// std::cout<<"Result:"<<std::endl;
+	// std::cout<<tree4<<std::endl;
 
-	tree3.clear();
-	tree3 = std::move(tree4);
-	tree4.clear();
-	std::cout<<"Expected:"<<std::endl;
-	std::cout<<"[1,1] [3,1] [4,1] [6,1] [7,1] [8,1] [10,1] [14,1]"<<std::endl;
-	std::cout<<"Result:"<<std::endl;
-	std::cout<<tree3<<std::endl;
+	// tree3.clear();
+	// tree3 = std::move(tree4);
+	// tree4.clear();
+	// std::cout<<"Expected:"<<std::endl;
+	// std::cout<<"[1,1] [3,1] [4,1] [6,1] [7,1] [8,1] [10,1] [14,1]"<<std::endl;
+	// std::cout<<"Result:"<<std::endl;
+	// std::cout<<tree3<<std::endl;
 
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: erase"<<std::endl;
