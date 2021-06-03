@@ -8,6 +8,6 @@ To run the executable, go to the directory *src* and use the command:
 
 *./main.x*
 
-To create the documentation, use the command:
+To generate the documentation, use the command:
 
 *doxygen Doxygen/doxy.in*
