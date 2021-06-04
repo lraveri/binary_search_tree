@@ -232,22 +232,22 @@ void bst<Tk,Tv,Tc>::printNode(Tk a) {
 	auto it = bst<Tk,Tv,Tc>::find(a);  
 	auto n = it.current;      																			
 	if (n) {														
-    	std::cout<<"node = " << n->elem.first<<" -> ";		
-    	if(!(n->left)) {										
-    		std::cout<<"left child = null, ";
+		std::cout<<"node = " << n->elem.first<<" -> ";		
+		if(!(n->left)) {										
+			std::cout<<"left child = null, ";
 		} else {						
-    		std::cout<<"left child = "<<n->left->elem.first<<", ";
+			std::cout<<"left child = "<<n->left->elem.first<<", ";
 		}			
-    	if(!(n->right)) {										
-      	std::cout<<"right child = null, ";	
+		if(!(n->right)) {										
+			std::cout<<"right child = null, ";	
 		} else {					
-      	std::cout<<"right child = "<<n->right->elem.first<<", ";	
+			std::cout<<"right child = "<<n->right->elem.first<<", ";	
 		}		
 		if(!(n->parent)) {
 			std::cout<<"parent = null"<<std::endl;
 		} else {
 			std::cout<<"parent = "<<n->parent->elem.first<<std::endl;
 		}
-  	}																
-    return;
+	}																
+	return;
 }
