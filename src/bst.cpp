@@ -156,8 +156,8 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 	auto it = find(x);
 
 	if(it==end()) return;                                // Case: the node is not present in the bst
-
-    auto n=it.current;     
+	
+	auto n=it.current;     
 
 	if(!(n->left) && !(n->right)) {                     // Case: the node is a leaf
 		if(n->parent->right.get() == n) {               // Sub case: the node is the right child of the parent
@@ -168,11 +168,11 @@ void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 	}
 
 	if (n->right && n->left) {                          // Case: the node has two children   
-        ++it;
-        auto next = it.current;
-        next->left = std::move(n->left);  
-        next->left->parent = next;
-        n->right->parent = n->parent;
+		++it;
+		auto next = it.current;
+		next->left = std::move(n->left);  
+		next->left->parent = next;
+		n->right->parent = n->parent;
 	}
 
 	if(!(n->parent)) {                                  // Case: the node is the root
