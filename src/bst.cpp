@@ -8,10 +8,10 @@ typename bst<Tk,Tv,Tc>::Iterator bst<Tk,Tv,Tc>::begin() noexcept {
 		while(n->left) {
 			n = n->left.get();
 		}
-        return Iterator{n};
-    } else {
-        return Iterator{nullptr};
-    }
+		return Iterator{n};
+	} else {
+		return Iterator{nullptr};
+	}
 }
 
 template <class Tk,class Tv,class Tc>
@@ -145,6 +145,7 @@ void bst<Tk,Tv,Tc>::copy(const std::unique_ptr<node_type>& n) {
 		copy(n->right);
 	}
 }
+
 
 template <class Tk,class Tv,class Tc>
 void bst<Tk,Tv,Tc>::erase(const Tk& x) {
