@@ -24,7 +24,7 @@ typename bst<Tk,Tv,Tc>::Const_iterator bst<Tk,Tv,Tc>::begin() const noexcept {
 		return Const_iterator{n};
 	} else {
 		return Const_iterator{nullptr};
-		}
+	}
 }
 
 template <class Tk,class Tv,class Tc>
@@ -34,10 +34,10 @@ typename bst<Tk,Tv,Tc>::Const_iterator bst<Tk,Tv,Tc>::cbegin() const noexcept {
 		while(n->left) {
 			n = n->left.get();
 		}
-        return Const_iterator{n};
-    } else {
-        return Const_iterator{nullptr};
-    }
+		return Const_iterator{n};
+	} else {
+		return Const_iterator{nullptr};
+	}
 }
 
 template <class Tk,class Tv,class Tc>
