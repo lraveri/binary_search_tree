@@ -47,7 +47,7 @@ public:
         	iterator it{*this};
         	++(*this);
         	return it;
-    }
+	}
 
 	bool operator==(const iterator& other) { return current == other.current; }
 
