@@ -103,7 +103,7 @@ typename bst<Tk,Tv,Tc>::Iterator bst<Tk,Tv,Tc>::find(const Tk& x) {
 		if(!comp(tmp->elem.first, x) && !comp(x,tmp->elem.first)) {
 			return Iterator{tmp};
 		} else if(comp(tmp->elem.first,x)) {                             
-        	tmp=tmp->right.get();
+			tmp=tmp->right.get();
 		} else {
 			tmp=tmp->left.get();	
 		}				           
@@ -118,7 +118,7 @@ typename bst<Tk,Tv,Tc>::Const_iterator bst<Tk,Tv,Tc>::find(const Tk& x) const {
 		if(!comp(tmp->elem.first, x) && !comp(x,tmp->elem.first)) {
 			return Const_iterator{tmp};
 		} else if(comp(tmp->elem.first,x)) {                            
-        	tmp=tmp->right.get();
+			tmp=tmp->right.get();
 		} else {
 			tmp=tmp->left.get();	
 		}				           
