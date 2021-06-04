@@ -205,12 +205,12 @@ void bst<Tk,Tv,Tc>::balance() {
 	Iterator end{this->end()};
 	if(it == end){
 		return;
-    } else {											
+	} else {											
 		std::vector<std::pair<Tk, Tv>> v;
-	    for(; it != end; ++it) {
-	        v.push_back(*it);
+		for(; it != end; ++it) {
+			v.push_back(*it);
 		}
-	   	this->clear();
+		this->clear();
 		balance_aux(v, 0, v.size()-1);					
 	}
 }
