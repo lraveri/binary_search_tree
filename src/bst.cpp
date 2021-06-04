@@ -150,61 +150,61 @@ void bst<Tk,Tv,Tc>::copy(const std::unique_ptr<node_type>& n) {
 template <class Tk,class Tv,class Tc>
 void bst<Tk,Tv,Tc>::erase(const Tk& x) {
 
-    if(!root) return;
-    auto it = find(x);
-    if(it==end()) return;
-    auto n=it.current;                                           		// n is the node to erase
-    
-    if(n->left && n->right) {                                    		// Case: n has two children
-        ++it;
-        auto s = it.current;                                     		// s is the successor
-        s->left = std::move(n->left); 
-        s->left->parent = s;
-        if(!n->parent) {                                        		// Subcase: n is the root
-            n->right->parent = nullptr;
-            root = std::move(n->right);
-        } else if(n->parent->right.get()==n) {							// Subcase: n is a right child												
-            n->right->parent = n->parent;
-            n->parent->right = std::move(n->right);
-        } else {														// Subcase: n is a left child										
-            n->right->parent = n->parent;
-            n->parent->left = std::move(n->right);
-        }
-    } else if ((!(n->left) && n->right) || (n->left && !(n->right))) {  // Case: n has one child
-        if(!n->parent) {												// Subcase: n is the root
-            if (n->right) {
-                n->right->parent = nullptr;
-                root = std::move(n->right);
-            } else {
-                n->left->parent = nullptr;
-                root = std::move(n->left);
-            }
-        } else if(n->parent->right.get()==n) {							// Subcase: n is a right child
-            if(n->right) {
-                n->right->parent = n->parent;
-                n->parent->right = std::move(n->right);
-            } else {
-                n->left->parent = n->parent;
-                n->parent->right = std::move(n->left);
-            }
-        } else {														// Subcase: n is a left child
-            if(n->right) {
-                n->right->parent = n->parent;
-                n->parent->left = std::move(n->right);
-            } else {
-                n->left->parent = n->parent;
-                n->parent->left = std::move(n->left); 
-            }
-        }
-    } else {                                                            // Case: n has no children
-        if(!n->parent) {												// Subcase: n is the root
-            root.reset();
-        } else if(n->parent->right.get()==n) {							// Subcase: n is a right child
-            n->parent->right.reset();
-        } else {
-            n->parent->left.reset();									// Subcase: n is a left child
-        }
-    }
+	if(!root) return;
+	auto it = find(x);
+	if(it==end()) return;
+	auto n=it.current;	// n is the node to erase
+
+	if(n->left && n->right) {	// Case: n has two children
+		++it;
+		auto s = it.current;	// s is the successor
+		s->left = std::move(n->left); 
+		s->left->parent = s;
+		if(!n->parent) {	// Subcase: n is the root
+			n->right->parent = nullptr;
+			root = std::move(n->right);
+		} else if(n->parent->right.get()==n) {	// Subcase: n is a right child												
+			n->right->parent = n->parent;
+			n->parent->right = std::move(n->right);
+		} else {	// Subcase: n is a left child										
+			n->right->parent = n->parent;
+			n->parent->left = std::move(n->right);
+		}
+	} else if ((!(n->left) && n->right) || (n->left && !(n->right))) {	// Case: n has one child
+		if(!n->parent) {	// Subcase: n is the root
+			if (n->right) {
+				n->right->parent = nullptr;
+				root = std::move(n->right);
+			} else {
+				n->left->parent = nullptr;
+				root = std::move(n->left);
+			}
+		} else if(n->parent->right.get()==n) {	// Subcase: n is a right child
+			if(n->right) {
+				n->right->parent = n->parent;
+				n->parent->right = std::move(n->right);
+			} else {
+				n->left->parent = n->parent;
+				n->parent->right = std::move(n->left);
+			}
+		} else {	// Subcase: n is a left child
+			if(n->right) {
+				n->right->parent = n->parent;
+				n->parent->left = std::move(n->right);
+			} else {
+				n->left->parent = n->parent;
+				n->parent->left = std::move(n->left); 
+			}
+		}
+	} else {	// Case: n has no children
+		if(!n->parent) {	// Subcase: n is the root
+			root.reset();
+		} else if(n->parent->right.get()==n) {	// Subcase: n is a right child
+			n->parent->right.reset();
+		} else {
+			n->parent->left.reset();	// Subcase: n is a left child
+		}
+	}
 }
 
 template <class Tk,class Tv,class Tc>
