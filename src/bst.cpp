@@ -100,12 +100,13 @@ template <class Tk,class Tv,class Tc>
 typename bst<Tk,Tv,Tc>::Iterator bst<Tk,Tv,Tc>::find(const Tk& x) {
 	auto tmp=root.get();
 	while(tmp) {
-		if(!comp(tmp->elem.first, x) && !comp(x,tmp->elem.first))  
+		if(!comp(tmp->elem.first, x) && !comp(x,tmp->elem.first)) {
 			return Iterator{tmp};
-		else if(comp(tmp->elem.first,x))                              
+		} else if(comp(tmp->elem.first,x)) {                             
         	tmp=tmp->right.get();
-		else
-			tmp=tmp->left.get();					           
+		} else {
+			tmp=tmp->left.get();	
+		}				           
 	}
 	return end();
 }
@@ -114,12 +115,13 @@ template <class Tk,class Tv,class Tc>
 typename bst<Tk,Tv,Tc>::Const_iterator bst<Tk,Tv,Tc>::find(const Tk& x) const {
 	auto tmp=root.get();
 	while(tmp) {
-		if(!comp(tmp->elem.first, x) && !comp(x,tmp->elem.first))  
+		if(!comp(tmp->elem.first, x) && !comp(x,tmp->elem.first)) {
 			return Const_iterator{tmp};
-		else if(comp(tmp->elem.first,x))                              
+		} else if(comp(tmp->elem.first,x)) {                            
         	tmp=tmp->right.get();
-		else
-			tmp=tmp->left.get();					           
+		} else {
+			tmp=tmp->left.get();	
+		}				           
 	}
 	return cend();
 }
