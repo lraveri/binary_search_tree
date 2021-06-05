@@ -170,10 +170,6 @@ int main() {
 	std::cout<<"Test: erase"<<std::endl;
 	std::cout<<"******************************************************************************"<<std::endl;
 
-	// std::cout<<"Expected:"<<std::endl;
-	// std::cout<<"[1,1] [2,1] [3,1] [4,1] [5,1] [6,1] [7,1]"<<std::endl;
-	// std::cout<<"Result:"<<std::endl;
-
 	tree.insert(pair5);
 	tree.insert(pair4);
 	tree.insert(pair7);
@@ -268,9 +264,6 @@ int main() {
 	std::cout<<"******************************************************************************"<<std::endl;
 	std::cout<<"Test: balance"<<std::endl;
 	std::cout<<"******************************************************************************"<<std::endl;
-
-	// std::cout<<"Tree:"<<std::endl;
-	// std::cout<<tree<<std::endl;	
 
 	tree.insert(pair1);
 	tree.insert(pair2);
